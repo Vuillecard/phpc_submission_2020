@@ -82,7 +82,7 @@ double mpi_dot_openmp(double *v1, double *v2,int vector_size) // need to pass it
     double sub_result= 0.0;
     int index ;
 
-    #pragma omp parallel for reduction(+:sub_prod)
+    #pragma omp parallel for reduction(+:sub_result)
     for ( index = 0; index < vector_size; index++)
     {
         sub_result += v1[index]*v2[index];
@@ -226,6 +226,7 @@ void cg_solver_mpi( double *bloc_A, double *b, double *x, int vector_size,int bl
     // send x to processor Root
     MPI_Allgather(bloc_x, bloc_vector_size , MPI_DOUBLE, x, bloc_vector_size, MPI_DOUBLE, MPI_COMM_WORLD);
 
+    /* Debug test
     double *r;
     r = (double *) malloc(vector_size*sizeof(double));
     memset(bloc_Ap, 0., bloc_vector_size* sizeof(double));
@@ -239,6 +240,7 @@ void cg_solver_mpi( double *bloc_A, double *b, double *x, int vector_size,int bl
     printf("\terror estimate is ||Ax -b|| = %E\n", sqrt(res));
 
     free(r);
+    */
 
     // free the memories :
 

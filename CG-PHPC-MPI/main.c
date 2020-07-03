@@ -64,7 +64,9 @@ int main ( int argc, char **argv ) {
         vector_size = sA.n;
 
         h = 1./(double)vector_size;
-        //b = init_source_term(vector_size,h);
+        b = init_source_term(vector_size,h);
+
+        /* Debug test
         x = (double*) malloc(vector_size* sizeof(double));
 
         for (int i = 0; i < vector_size ; ++i) {
@@ -76,7 +78,7 @@ int main ( int argc, char **argv ) {
         for (int i = 0; i < 100 ; ++i) {
             printf("b[i] = %f [s]\n",b[i]);
         }
-
+        */
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
